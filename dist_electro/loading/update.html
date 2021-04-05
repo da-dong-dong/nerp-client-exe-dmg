@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新</title>
+    <style>
+        .updataBox{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        .pgBox{
+            position: relative;
+        }
+        .box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="updataBox" >
+        <h1>更新中</h1>
+        <div class="pgBox">
+            <progress max="100" value="0" id="pg"></progress>
+            <span id="box" class="box"></span>
+        </div>
+        
+    </div>
+    <script>
+        //渲染进程
+        const ipc = require('electron').ipcRenderer;
+        let percent = ''
+        //ipcRenderer.send('checkForUpdate');
+        // 更新app
+        setInterval(function(e){
+            if(pg.value!=100){
+                document.getElementById('pg').value++;
+                document.getElementById('box').innerHTML = '11%'
+            }else{
+                document.getElementById('box').innerHTML = '11%'
+            } 
+        },1000);
+        ipc.on('update-app', (e, obj) => {
+            console.log(obj)
+          if (obj.cmd === 'download-progress') {
+          
+            percent = Math.trunc(obj.message.percent) || 0;
+            console.log(percent)
+            document.getElementById('box').innerHTML = percent + "%"
+            document.getElementById('pg').value = percent
+          }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+provider: generic
+url: 'https://storage.lyfz.net/client/'
+updaterCacheDirName: lyfz-erp-cloud-download-updater
