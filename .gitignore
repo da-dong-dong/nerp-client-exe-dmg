@@ -3,6 +3,7 @@ node_modules
 /dist
 /dist_electron
 public/cloudDownload
+dist_electro/lyfz-erp/cloudDownload
 # local env files
 .env.local
 .env.*.local
